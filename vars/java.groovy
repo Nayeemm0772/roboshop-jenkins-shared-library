@@ -1,11 +1,22 @@
-def call()  {
-
+def call() {
     pipeline {
 
         agent any
 
         stages {
-            common.codeQuality()
+
+            stage('compile code'){
+                steps {
+                    echo 'compile code'
+                }
+            }
+
+
+            stage('Code Quality') {
+                steps {
+                    echo 'Code Quality'
+                }
+            }
 
             stage('Style Checks') {
                 when
@@ -18,7 +29,7 @@ def call()  {
 
                         }
                 steps {
-                    echo 'Code Quality'
+                    echo 'style checks'
                 }
             }
 
@@ -32,10 +43,18 @@ def call()  {
                                     }
                         }
                 steps {
-                    echo 'Code Quality'
+                    echo 'Unit Tests'
                 }
             }
 
+
+
+            stage('Build package') {
+                when { tag "*"}
+                steps {
+                    echo 'Download Dependencies'
+                }
+            }
 
             stage('Prepare Artifact') {
                 when { tag "*"}
@@ -56,7 +75,6 @@ def call()  {
         }
 
     }
-
 
 
 }
