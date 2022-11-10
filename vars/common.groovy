@@ -1,5 +1,5 @@
 def codeCheckout() {
-    satge('code checkout')  {
+    stage('code checkout')  {
         sh 'find . | sed 1d | xargs rm -Rf '
         git branch: 'main', url: "https://github.com/Nayeemm0772/${COMPONENT}.git"
     }
