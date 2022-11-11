@@ -20,7 +20,7 @@ def codeQuality()
 def codeChecks()    {
     if ( env.BRANCH_NAME == "main" || env.TAG_NAME ==~ ".*" ){
 
-        stage('Style Checks') {
+        stage('Style & Lint Checks') {
             echo 'Style Checks'
         }
 
